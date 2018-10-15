@@ -2,97 +2,91 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Killer_Sudoku
 {
     class Tetris
     {
-        int[,] board = new int[5, 5];
+        const int lenght = 20;
+        static int[,] board = new int[lenght,lenght];
         public void Main()
         {
-           
-            
-            generateSudoku(board, 0, 0, 1);
-            for(int i = 0; i<5; i++)
+
+            generateSudoku(0, 0, 1);
+            for(int i = 0; i< lenght; i++)
             {
-                for (int j = 0; j<5; j++)
+                for (int j = 0; j< lenght; j++)
                 {
+                    Console.Write(" ");
                     Console.Write(board[i,j]);
                 }
                 Console.WriteLine("");
             }
         }
 
-        public bool generateSudoku(int[,] tablero, int row, int col, int testNumber)
+        public static bool generateSudoku(int row, int col, int testNumber)
         {
-            if(testNumber == 6)
-            {
-                return false;
-            }
-            
-            else if (row == 4 && col == 4)
+            if (row == lenght)
             {
                 return true;
             }
+            else if(board[row,col] != 0)
+            {
+                return next(1, row, col);
+            }
             else
             {
-                if (!(IsInRow(tablero, row, testNumber) || IsInCol(tablero, col, testNumber)))
+                testNumber = 1;
+                for (; testNumber <= lenght; testNumber++)
                 {
-                    if (col == 4)
+                    if(IsInRow(row, testNumber) || IsInCol(col, testNumber))
                     {
-                        tablero[row, col] = testNumber;
-
-                        if (generateSudoku(tablero, ++row, 0, testNumber) == false)
-                        {
-                            return generateSudoku(tablero, row, col, ++testNumber);
-                        }
-                        else
-                        {
-                            return generateSudoku(tablero, ++row, 0, 1);
-                        }
+                        continue;
                     }
                     else
                     {
-                        tablero[row, col] = testNumber;
-
-                        if(generateSudoku(tablero, row, ++col , testNumber) == false)
+                        board[row, col] = testNumber;
+                        if (next(testNumber,row,col))
                         {
-                            return generateSudoku(tablero, row, col, ++testNumber);
-                        }
-                        else
-                        {
-                            return generateSudoku(tablero, row, ++col , 1);
-                        }
+                            return true;
+                        } 
                     }
                 }
-                else
-                {
-                    return false;
-                }
+                board[row, col] = 0;
+                return false;
             }
             
         }
 
-
-
-        public bool IsInRow(int[,] mat, int row, int number)
+        public static bool next(int testNum, int row, int col)
         {
-            //return row.Contains(number);
-            for (int col = 0; col < mat.GetLength(0); col++)
+            if (col == lenght - 1)
             {
-                if (mat[row, col].Equals(number))
+                return generateSudoku(++row, 0, testNum);
+            }
+            else
+            {
+                return generateSudoku(row, ++col, testNum);
+            }
+        }
+
+        public static bool IsInRow(int row, int number)
+        {
+            for (int col = 0; col < lenght; col++)
+            {
+                if (board[row, col].Equals(number))
                 {
                     return true;
                 }
             }
             return false;
         }
-        public bool IsInCol(int[,] matrix, int col, int number)
+        public static bool IsInCol(int col, int number)
         {
-            for (int row = 0; row < matrix.GetLength(0); row++)
+            for (int row = 0; row < lenght; row++)
             {
-                if (matrix[row, col].Equals(number))
+                if (board[row, col].Equals(number))
                 {
                     return true;
                 }
