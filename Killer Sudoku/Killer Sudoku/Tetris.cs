@@ -13,7 +13,7 @@ namespace Killer_Sudoku
         public void Main()
         {
 
-            generateSudoku(0, 0, 1);
+            solveSudoku(0, 0, 1);
             for(int i = 0; i< lenght; i++)
             {
                 for (int j = 0; j< lenght; j++)
@@ -25,7 +25,7 @@ namespace Killer_Sudoku
             }
         }
 
-        public static bool generateSudoku(int row, int col, int testNumber)
+        public static bool solveSudoku(int row, int col, int testNumber)
         {
             if (row == lenght)
             {
@@ -63,11 +63,11 @@ namespace Killer_Sudoku
         {
             if (col == lenght - 1)
             {
-                return generateSudoku(++row, 0, testNum);
+                return solveSudoku(++row, 0, testNum);
             }
             else
             {
-                return generateSudoku(row, ++col, testNum);
+                return solveSudoku(row, ++col, testNum);
             }
         }
 
