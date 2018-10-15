@@ -14,7 +14,7 @@ namespace Killer_Sudoku
     {
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();  
         }
     }
 }

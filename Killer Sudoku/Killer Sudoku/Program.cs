@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Killer_Sudoku.KillerSudokuBoard;
+using Killer_Sudoku.TetrisFigures;
+using Killer_Sudoku.TetrisFigures.Figures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +17,20 @@ namespace Killer_Sudoku
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            // Application.EnableVisualStyles();
+            // Application.SetCompatibleTextRenderingDefault(false);
+            // Application.Run(new Form1());
+
+            int[,] test2 = { { 2, 2 }, { 2, 1 }, { 1, 2 } };
+
+            TetrisFigure figure = FigureFactory.GetNewFigure("skew");
+            int [] list = { 5, 1 };
+            figure.InitFigureCoordinates(list);
+
+            foreach (var i in figure.Positions)
+            {
+                ArrayExt.PrintArray(i.Position);
+            }
         }
     }
 }

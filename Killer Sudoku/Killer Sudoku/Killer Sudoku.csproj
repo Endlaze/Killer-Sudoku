@@ -45,6 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Class2.cs" />
+    <Compile Include="Utils\ArrayUtils.cs" />
+    <Compile Include="KillerSudokuBoard\Board.cs" />
+    <Compile Include="TetrisFigures\ArrayOperations.cs" />
+    <Compile Include="TetrisFigures\Cell.cs" />
+    <Compile Include="TetrisFigures\Figures\Block.cs" />
+    <Compile Include="TetrisFigures\Figures\FigureFactory.cs" />
+    <Compile Include="TetrisFigures\Figures\Gun.cs" />
+    <Compile Include="TetrisFigures\Figures\Skew.cs" />
+    <Compile Include="TetrisFigures\Figures\Straight.cs" />
+    <Compile Include="TetrisFigures\TetrisFigure.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,5 +87,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
