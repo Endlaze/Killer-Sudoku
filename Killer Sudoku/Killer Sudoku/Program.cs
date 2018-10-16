@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Killer_Sudoku.KillerSudokuSolver;
 namespace Killer_Sudoku
 {
     static class Program
@@ -31,6 +31,8 @@ namespace Killer_Sudoku
             {
                 ArrayExt.PrintArray(i.Position);
             }
+            SudokuSolver solver = new SudokuSolver();
+            solver.Main();
         }
     }
 }

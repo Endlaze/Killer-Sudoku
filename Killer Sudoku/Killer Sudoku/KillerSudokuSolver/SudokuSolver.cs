@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 
-namespace Killer_Sudoku
+namespace Killer_Sudoku.KillerSudokuSolver
 {
-    class Tetris
+    class SudokuSolver
     {
-        const int lenght = 20;
-        static int[,] board = new int[lenght,lenght];
+        const int lenght = 17;
+        static int[,] board = new int[lenght, lenght];
         public void Main()
         {
 
             solveSudoku(0, 0, 1);
-            for(int i = 0; i< lenght; i++)
+            for (int i = 0; i < lenght; i++)
             {
-                for (int j = 0; j< lenght; j++)
+                for (int j = 0; j < lenght; j++)
                 {
                     Console.Write(" ");
-                    Console.Write(board[i,j]);
+                    Console.Write(board[i, j]);
                 }
                 Console.WriteLine("");
             }
@@ -31,7 +31,7 @@ namespace Killer_Sudoku
             {
                 return true;
             }
-            else if(board[row,col] != 0)
+            else if (board[row, col] != 0)
             {
                 return next(1, row, col);
             }
@@ -40,23 +40,23 @@ namespace Killer_Sudoku
                 testNumber = 1;
                 for (; testNumber <= lenght; testNumber++)
                 {
-                    if(IsInRow(row, testNumber) || IsInCol(col, testNumber))
+                    if (IsInRow(row, testNumber) || IsInCol(col, testNumber))
                     {
                         continue;
                     }
                     else
                     {
                         board[row, col] = testNumber;
-                        if (next(testNumber,row,col))
+                        if (next(testNumber, row, col))
                         {
                             return true;
-                        } 
+                        }
                     }
                 }
                 board[row, col] = 0;
                 return false;
             }
-            
+
         }
 
         public static bool next(int testNum, int row, int col)
@@ -95,6 +95,3 @@ namespace Killer_Sudoku
         }
     }
 }
-
-
-
