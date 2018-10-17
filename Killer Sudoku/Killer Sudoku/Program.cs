@@ -1,12 +1,9 @@
-﻿using Killer_Sudoku.KillerSudokuBoard;
-using Killer_Sudoku.TetrisFigures;
-using Killer_Sudoku.TetrisFigures.Figures;
+﻿using Killer_Sudoku.TetrisFigures.Figures;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Killer_Sudoku.KillerSudokuSolver;
+using Killer_Sudoku.KillerSudokuBoard;
+using System.Windows.Forms;
+
 namespace Killer_Sudoku
 {
     static class Program
@@ -17,22 +14,22 @@ namespace Killer_Sudoku
         [STAThread]
         static void Main()
         {
-            // Application.EnableVisualStyles();
-            // Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new Form1());
+             Application.EnableVisualStyles();
+             Application.SetCompatibleTextRenderingDefault(false);
+             Application.Run(new GUI());
 
-            int[,] test2 = { { 2, 2 }, { 2, 1 }, { 1, 2 } };
+          
 
-            TetrisFigure figure = FigureFactory.GetNewFigure("skew");
-            int [] list = { 5, 1 };
-            figure.InitFigureCoordinates(list);
+            //SudokuSolver solver = new SudokuSolver();
+            // solver.Main();
+           
 
-            foreach (var i in figure.Positions)
-            {
-                ArrayExt.PrintArray(i.Position);
-            }
-            SudokuSolver solver = new SudokuSolver();
-            solver.Main();
+            Board board = new Board(5, "mult");
+            board.fitTetrisFigures();
+          
+
+            
+           
         }
     }
 }

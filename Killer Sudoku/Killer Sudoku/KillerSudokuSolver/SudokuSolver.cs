@@ -8,26 +8,27 @@ namespace Killer_Sudoku.KillerSudokuSolver
 {
     class SudokuSolver
     {
-        const int lenght = 17;
-        static int[,] board = new int[lenght, lenght];
-        public void Main()
+        int length;
+        int[,] board; 
+        
+        public int[,] GetSudokuBoard(int length)
         {
+            this.length = length;
+            this.board = new int[length, length];
+            InitSudoku();
 
+            return this.board;
+        }
+        
+        
+        public void InitSudoku()
+        {
             solveSudoku(0, 0, 1);
-            for (int i = 0; i < lenght; i++)
-            {
-                for (int j = 0; j < lenght; j++)
-                {
-                    Console.Write(" ");
-                    Console.Write(board[i, j]);
-                }
-                Console.WriteLine("");
-            }
         }
 
-        public static bool solveSudoku(int row, int col, int testNumber)
+        public  bool solveSudoku(int row, int col, int testNumber)
         {
-            if (row == lenght)
+            if (row == length)
             {
                 return true;
             }
@@ -38,7 +39,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
             else
             {
                 testNumber = 1;
-                for (; testNumber <= lenght; testNumber++)
+                for (; testNumber <= length; testNumber++)
                 {
                     if (IsInRow(row, testNumber) || IsInCol(col, testNumber))
                     {
@@ -59,9 +60,9 @@ namespace Killer_Sudoku.KillerSudokuSolver
 
         }
 
-        public static bool next(int testNum, int row, int col)
+        public bool next(int testNum, int row, int col)
         {
-            if (col == lenght - 1)
+            if (col == length - 1)
             {
                 return solveSudoku(++row, 0, testNum);
             }
@@ -71,9 +72,9 @@ namespace Killer_Sudoku.KillerSudokuSolver
             }
         }
 
-        public static bool IsInRow(int row, int number)
+        public bool IsInRow(int row, int number)
         {
-            for (int col = 0; col < lenght; col++)
+            for (int col = 0; col < length; col++)
             {
                 if (board[row, col].Equals(number))
                 {
@@ -82,9 +83,9 @@ namespace Killer_Sudoku.KillerSudokuSolver
             }
             return false;
         }
-        public static bool IsInCol(int col, int number)
+        public bool IsInCol(int col, int number)
         {
-            for (int row = 0; row < lenght; row++)
+            for (int row = 0; row < length; row++)
             {
                 if (board[row, col].Equals(number))
                 {
