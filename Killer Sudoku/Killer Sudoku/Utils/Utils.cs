@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,27 @@ namespace Killer_Sudoku.Utils
             var rand = new System.Random();
             int index = rand.Next(minRange, maxRange - exclude.Count);
             return range.ElementAt(index);
+        }
+
+        public static Color GetNewColor (Color color)
+        {
+            
+            Color newColor = color;
+
+            while (newColor.Equals(color))
+            {
+                Random rand = new Random();
+                Random rand1 = new Random();
+                Random rand2 = new Random();
+                int r = rand1.Next(100, 255);
+                int g = rand2.Next(100, 255);
+                int b = rand2.Next(100, 255);
+                newColor =Color.FromArgb(r, g, b);
+                Console.WriteLine("Red: {0} Green {1} Blue {2}", r, g, b);
+            }
+            
+
+            return newColor;
         }
     }
 }

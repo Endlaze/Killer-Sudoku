@@ -12,8 +12,9 @@ namespace Killer_Sudoku.KillerSudokuBoard
 {
     class Board
     {
+        private Color lastColor= Color.FromArgb(255,0,0);
         private int size;
-        private int[,] values;
+        public int[,] values;
         public Cell [,] board;
         public List<TetrisFigure> boardFigures = new List<TetrisFigure>();
         private string operation;
@@ -91,15 +92,8 @@ namespace Killer_Sudoku.KillerSudokuBoard
                     cont++;
                     rotated = 0;
                 }
-                
             }
-            Color c =  Color.FromArgb(255, 5, 7);
-            Color d = Color.FromArgb(255, 5, 8);
-            if (d.Equals(c))
-            {
-                Console.WriteLine("true");
-
-            }
+            
 
             return figure;
         }
@@ -150,6 +144,9 @@ namespace Killer_Sudoku.KillerSudokuBoard
                 result = ApplyOperation(values[cell.Position[0], cell.Position[1]], result);
                 board[cell.Position[0], cell.Position[1]] = cell;
             }
+
+            lastColor = Utils.Utils.GetNewColor(lastColor);
+            figure.Color = lastColor;
             figure.Result = result;
             
         }

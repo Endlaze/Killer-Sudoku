@@ -20,32 +20,24 @@ namespace Killer_Sudoku
         public GUI()
         {
             InitializeComponent();
-
-            
-            
-
         }
 
         private void drawColors(PictureBox pictureBox, Color color)
         {
             pictureBox.BackColor = color;
-
         }
 
         private void drawOnPictureBox(string text, PictureBox pictureBox, int xCoordinate, int yCoordinate)
         {
             var image = pictureBox.Image;
             var font = new Font("Arial", 7);
+
             var graphics = Graphics.FromImage(image);
+            graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
             graphics.DrawString(text,font, Brushes.Black, new Point(xCoordinate,yCoordinate));
             pictureBox.Image = image;
 
         }
-
-     
-
-
-        
 
         private PictureBox [,] CreateBoard(int positionX, int positionY, int size, int blockSize)
         {
@@ -161,22 +153,31 @@ namespace Killer_Sudoku
         private void start_button_Click(object sender, EventArgs e)
         {
             int size = Int32.Parse(size_input.Text);
-            this.killer = new Board(size, "sum", 1);
+            int threads = Int32.Parse(thread_input.Text);
+            this.killer = new Board(size, "sum",threads);
             
             List<TetrisFigure> boardFigures = this.killer.boardFigures;
            
-            board1 = CreateBoard(10, 70, size, 25);
-            board2 = CreateBoard(570, 70, size, 25);
+            board1 = CreateBoard(10, 70, size, 26);
+            board2 = CreateBoard(560, 70, size, 26);
 
             foreach (var figure in boardFigures)
             {
                 foreach (var cell in figure.Positions)
                 {
-                    Console.Write(cell.Position[0]+" "+ cell.Position[1]);
-                    drawColors(board1[cell.Position[0], cell.Position[1]],figure.Color);
+                    drawColors(board1[cell.Position[0], cell.Position[1]], figure.Color);
                     drawColors(board2[cell.Position[0], cell.Position[1]], figure.Color);
                 }
             }
+
+            foreach (var figure in boardFigures)
+            {
+                drawOnPictureBox(figure.Result.ToString(), board1[figure.Positions[0].Position[0], figure.Positions[0].Position[1]], 0,0);
+                drawOnPictureBox(figure.Result.ToString(), board2[figure.Positions[0].Position[0], figure.Positions[0].Position[1]], 0, 0);
+
+            }
+            
         }
     }
+
 }

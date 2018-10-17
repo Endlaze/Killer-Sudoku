@@ -53,7 +53,6 @@ namespace Killer_Sudoku.KillerSudokuSolver
             {
                 isCompleted = true;
                 board = tablero;
-                ArrayExt.Print2DArray(tablero);
                 return true;
             }
 

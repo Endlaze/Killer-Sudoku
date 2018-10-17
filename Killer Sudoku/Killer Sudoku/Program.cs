@@ -15,13 +15,13 @@ namespace Killer_Sudoku
         [STAThread]
         static void Main()
         {
-            /*Application.EnableVisualStyles();
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GUI());*/
+            Application.Run(new GUI());
 
 
 
-            Board board = new Board(5, "sum", 1);
+           /* Board board = new Board(5, "sum", 1);
             board.fitTetrisFigures();
 
             foreach (var item in board.boardFigures)
@@ -31,7 +31,7 @@ namespace Killer_Sudoku
                     ArrayExt.PrintArray(caca.Position);
                 }
                 Console.WriteLine("Operacion " + item.Result);
-            }
+            }*/
             
 
         }
