@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Board.cs" />
     <Compile Include="KillerSudokuSolver\SudokuSolver.cs" />
     <Compile Include="Utils\ArrayUtils.cs" />
     <Compile Include="KillerSudokuBoard\Board.cs" />

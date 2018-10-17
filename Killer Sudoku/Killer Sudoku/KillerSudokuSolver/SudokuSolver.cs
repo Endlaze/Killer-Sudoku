@@ -3,90 +3,133 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Killer_Sudoku.KillerSudokuSolver
 {
     class SudokuSolver
     {
-        const int lenght = 17;
-        static int[,] board = new int[lenght, lenght];
-        public void Main()
-        {
+        static bool isCompleted = false;
+        int length;
+        int[,] board;
+        Board[] boardList;
+        int threads;
 
-            solveSudoku(0, 0, 1);
-            for (int i = 0; i < lenght; i++)
-            {
-                for (int j = 0; j < lenght; j++)
-                {
-                    Console.Write(" ");
-                    Console.Write(board[i, j]);
-                }
-                Console.WriteLine("");
-            }
+        public SudokuSolver(int length, int threads)
+        {
+            this.threads = threads;
+            this.length = length;
+            boardList = new Board[length];
         }
 
-        public static bool solveSudoku(int row, int col, int testNumber)
+        public void startThreads()
         {
-            if (row == lenght)
+            for (int i = 0; i < length; i++)
             {
+                boardList[i] = new Board(length);
+            }
+            Parallel.For(0, threads, numero =>
+            {
+                boardList[numero].isSolving = true;
+                if (solveSudoku(0, 0, boardList[numero].boardy, numero + 1))
+                {
+                    Console.WriteLine("El thread {0} ha logrado encontrar la solucion", numero);
+                }
+                
+            });
+
+            Thread.Sleep(100000);
+        }
+
+        public bool solveSudoku(int row, int col, int[,] tablero, int testNumber = 1)
+        {
+            
+            if (isCompleted)
+            {
+                return false;
+            }
+            
+            else if (row == length)
+            {
+                isCompleted = true;
+                board = tablero;
+                ArrayExt.Print2DArray(tablero);
                 return true;
             }
-            else if (board[row, col] != 0)
+
+            else if (tablero[row, col] != 0)
             {
-                return next(1, row, col);
+                return nextCell(row, col, tablero);
             }
             else
             {
-                testNumber = 1;
-                for (; testNumber <= lenght; testNumber++)
+                
+                for (; testNumber <= length; testNumber++)
                 {
-                    if (IsInRow(row, testNumber) || IsInCol(col, testNumber))
+                    if (IsInRow(row, testNumber, tablero) || IsInCol(col, testNumber, tablero) || isCompleted)
                     {
                         continue;
                     }
                     else
                     {
-                        board[row, col] = testNumber;
-                        if (next(testNumber, row, col))
+                        tablero[row, col] = testNumber;
+                        if (nextCell(row, col, tablero))
                         {
                             return true;
                         }
                     }
                 }
-                board[row, col] = 0;
+                if(row == 0 && col == 0)
+                {
+                    return nextBoard();
+                }
+                tablero[row, col] = 0;
                 return false;
             }
 
         }
 
-        public static bool next(int testNum, int row, int col)
+        private bool nextBoard()
         {
-            if (col == lenght - 1)
+            for (int i = 0; i < boardList.Length; i++)
             {
-                return solveSudoku(++row, 0, testNum);
+                if(boardList[i].isSolving == false)
+                {
+                    boardList[i].isSolving = true;
+                    return solveSudoku(0, 0, boardList[i].boardy, i + 1);
+                }
+            }
+            return false;
+        }
+
+        private  bool nextCell(int row, int col, int[,] tablero)
+        {
+            if (col == length - 1)
+            {
+                return solveSudoku(++row, 0, tablero);
             }
             else
             {
-                return solveSudoku(row, ++col, testNum);
+                return solveSudoku(row, ++col, tablero);
             }
         }
 
-        public static bool IsInRow(int row, int number)
+        private  bool IsInRow(int row, int number, int [,] tablero)
         {
-            for (int col = 0; col < lenght; col++)
+            for (int col = 0; col < length; col++)
             {
-                if (board[row, col].Equals(number))
+                if (tablero[row, col].Equals(number))
                 {
                     return true;
                 }
             }
             return false;
         }
-        public static bool IsInCol(int col, int number)
+        private  bool IsInCol(int col, int number, int[,] tablero)
         {
-            for (int row = 0; row < lenght; row++)
+            for (int row = 0; row < length; row++)
             {
-                if (board[row, col].Equals(number))
+                if (tablero[row, col].Equals(number))
                 {
                     return true;
                 }

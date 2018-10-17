@@ -31,8 +31,9 @@ namespace Killer_Sudoku
             {
                 ArrayExt.PrintArray(i.Position);
             }
-            SudokuSolver solver = new SudokuSolver();
-            solver.Main();
+            SudokuSolver solver = new SudokuSolver(15, 1);
+            solver.startThreads();
+            
         }
     }
 }
