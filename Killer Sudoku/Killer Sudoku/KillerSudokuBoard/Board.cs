@@ -12,7 +12,6 @@ namespace Killer_Sudoku.KillerSudokuBoard
 {
     class Board
     {
-        private int[] colors;
         private int size;
         private int[,] values;
         public Cell [,] board;
@@ -49,6 +48,8 @@ namespace Killer_Sudoku.KillerSudokuBoard
         //Function to fit the tetris figures in the board
         public void fitTetrisFigures()
         {
+            
+            int cont = 0;
             for (int i=0; i<board.GetLength(0); i++)
             {
                 for (int j=0; j<board.GetLength(1); j++)
@@ -57,9 +58,6 @@ namespace Killer_Sudoku.KillerSudokuBoard
                         int[] pivot = { i, j };
                         TetrisFigure figure = figureThatFits(pivot);
                         updateIsPartOfAFigure(figure);
-                        Random rnd = new Random();
-                        figure.Color = Color.FromArgb(rnd.Next(100, 256), rnd.Next(100, 256), rnd.Next(100, 256));
-
                         this.boardFigures.Add(figure);
                     }
                 }
@@ -84,7 +82,7 @@ namespace Killer_Sudoku.KillerSudokuBoard
                 }
                 else
                 {
-                    figurePosition = Utils.Utils.GiveMeANumber(testedFigures, figures.Length);
+                    figurePosition = Utils.Utils.GiveMeANumber(testedFigures,0, figures.Length);
                     testedFigures[cont] = figurePosition;
                     figure = FigureFactory.GetNewFigure(figures[figurePosition], figuresSizes[figurePosition]);
                     figure.InitFigureCoordinates(pivot);
@@ -93,7 +91,14 @@ namespace Killer_Sudoku.KillerSudokuBoard
                 }
                 
             }
-            
+            Color c =  Color.FromArgb(255, 5, 7);
+            Color d = Color.FromArgb(255, 5, 8);
+            if (d.Equals(c))
+            {
+                Console.WriteLine("true");
+
+            }
+
             return figure;
         }
 

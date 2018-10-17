@@ -8,13 +8,13 @@ namespace Killer_Sudoku.Utils
 {
     public static class Utils
     {
-        public static int GiveMeANumber(int [] excludedNumbers, int maxRange)
+        public static int GiveMeANumber(int [] excludedNumbers,int minRange ,int maxRange)
         {
             var exclude = new HashSet<int>(excludedNumbers);
 
             var range = Enumerable.Range(0, maxRange).Where(i => !exclude.Contains(i));
             var rand = new System.Random();
-            int index = rand.Next(0, maxRange - exclude.Count);
+            int index = rand.Next(minRange, maxRange - exclude.Count);
             return range.ElementAt(index);
         }
     }
