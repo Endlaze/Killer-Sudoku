@@ -15,6 +15,7 @@ namespace Killer_Sudoku.TetrisFigures.Figures
 
         public override void InitFigureCoordinates(int[] pivot)
         {
+            MaxRotation = 1;
             int[,] blockCoordinates = new int [this.size,2];
 
             for (int i=0; i<size; i++)

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Killer_Sudoku
 {
-    class Board
+    class GenericBoard
     {
         public int[,] boardy;
         public bool isSolving = false;
-        public Board(int size)
+        public GenericBoard(int size)
         {
             boardy = new int[size, size];
         }

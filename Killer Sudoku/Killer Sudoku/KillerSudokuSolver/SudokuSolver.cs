@@ -12,33 +12,33 @@ namespace Killer_Sudoku.KillerSudokuSolver
         static bool isCompleted = false;
         int length;
         int[,] board;
-        Board[] boardList;
+        GenericBoard[] boardList;
         int threads;
 
         public SudokuSolver(int length, int threads)
         {
             this.threads = threads;
             this.length = length;
-            boardList = new Board[length];
+            boardList = new GenericBoard[length];
+            startThreads();
+        }
+
+        public int [,] GetSudokuBoard()
+        {
+            return board;
         }
 
         public void startThreads()
         {
             for (int i = 0; i < length; i++)
             {
-                boardList[i] = new Board(length);
+                boardList[i] = new GenericBoard(length);
             }
             Parallel.For(0, threads, numero =>
             {
                 boardList[numero].isSolving = true;
-                if (solveSudoku(0, 0, boardList[numero].boardy, numero + 1))
-                {
-                    Console.WriteLine("El thread {0} ha logrado encontrar la solucion", numero);
-                }
-                
+                solveSudoku(0, 0, boardList[numero].boardy, numero + 1);
             });
-
-            Thread.Sleep(100000);
         }
 
         public bool solveSudoku(int row, int col, int[,] tablero, int testNumber = 1)
@@ -63,7 +63,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
             }
             else
             {
-                
+
                 for (; testNumber <= length; testNumber++)
                 {
                     if (IsInRow(row, testNumber, tablero) || IsInCol(col, testNumber, tablero) || isCompleted)
@@ -89,6 +89,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
 
         }
 
+
         private bool nextBoard()
         {
             for (int i = 0; i < boardList.Length; i++)
@@ -103,6 +104,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
         }
 
         private  bool nextCell(int row, int col, int[,] tablero)
+
         {
             if (col == length - 1)
             {
@@ -114,7 +116,9 @@ namespace Killer_Sudoku.KillerSudokuSolver
             }
         }
 
+
         private  bool IsInRow(int row, int number, int [,] tablero)
+
         {
             for (int col = 0; col < length; col++)
             {
@@ -125,7 +129,9 @@ namespace Killer_Sudoku.KillerSudokuSolver
             }
             return false;
         }
+
         private  bool IsInCol(int col, int number, int[,] tablero)
+
         {
             for (int row = 0; row < length; row++)
             {

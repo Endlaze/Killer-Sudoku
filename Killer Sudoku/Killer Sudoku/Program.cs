@@ -1,12 +1,10 @@
-﻿using Killer_Sudoku.KillerSudokuBoard;
-using Killer_Sudoku.TetrisFigures;
-using Killer_Sudoku.TetrisFigures.Figures;
+﻿using Killer_Sudoku.TetrisFigures.Figures;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Killer_Sudoku.KillerSudokuSolver;
+using Killer_Sudoku.KillerSudokuBoard;
+using System.Windows.Forms;
+using System.Threading;
+
 namespace Killer_Sudoku
 {
     static class Program
@@ -17,23 +15,25 @@ namespace Killer_Sudoku
         [STAThread]
         static void Main()
         {
-            // Application.EnableVisualStyles();
-            // Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new Form1());
+            /*Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new GUI());*/
 
-            int[,] test2 = { { 2, 2 }, { 2, 1 }, { 1, 2 } };
 
-            TetrisFigure figure = FigureFactory.GetNewFigure("skew");
-            int [] list = { 5, 1 };
-            figure.InitFigureCoordinates(list);
 
-            foreach (var i in figure.Positions)
+            Board board = new Board(5, "sum", 1);
+            board.fitTetrisFigures();
+
+            foreach (var item in board.boardFigures)
             {
-                ArrayExt.PrintArray(i.Position);
+                foreach (var caca in item.Positions)
+                {
+                    ArrayExt.PrintArray(caca.Position);
+                }
+                Console.WriteLine("Operacion " + item.Result);
             }
-            SudokuSolver solver = new SudokuSolver(15, 1);
-            solver.startThreads();
             
+
         }
     }
 }

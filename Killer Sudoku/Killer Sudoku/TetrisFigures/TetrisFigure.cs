@@ -1,6 +1,7 @@
 ﻿using Killer_Sudoku.TetrisFigures;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,19 +10,36 @@ namespace Killer_Sudoku
 {
     abstract class TetrisFigure
     {
-        private Cell[] blocks;
-        private string color;
+        private Cell[] cells;
+        private Color color;
         private int result;
+        private bool solving;
+        private int maxRotation;
+       
 
-        //Blocks setter & getter
+        //MaxRotation setter & getter
+        public int MaxRotation
+        {
+            get { return this.maxRotation; }
+            set { this.maxRotation = value; }
+        }
+
+        //Solving setter & getter
+        public bool Solving
+        {
+            get { return this.solving; }
+            set { this.solving = value; }
+        }
+
+        //Cells setter & getter
         public Cell[] Positions
         {
-            get { return this.blocks; }
-            set { this.blocks = value; }
+            get { return this.cells; }
+            set { this.cells = value; }
         }
 
         //Color setter & getter
-        public string Color
+        public Color Color
         {
             get { return this.color; }
             set { this.color = value; }
@@ -36,27 +54,31 @@ namespace Killer_Sudoku
         //Function to init array
         public void InitCells(int [,] coordinates)
         {
-            this.blocks = new Cell[coordinates.GetLength(0)];
+            this.cells = new Cell[coordinates.GetLength(0)];
             for (int i=0; i< coordinates.GetLength(0); i++)
             {
-                blocks[i] = new Cell();
-                blocks[i].Position = ArrayExt.GetRow(coordinates, i);
+                cells[i] = new Cell();
+                cells[i].Position = ArrayExt.GetRow(coordinates, i);
             }
         }
 
         //Rotate function
         public void Rotate()
         {
-            int[,] rotationMatrix = { {0,-1 }, {1,0} };
+            int[,] rotationMatrix = { {0,1 }, {-1,0} };
 
-            for (int i=1; i<this.blocks.GetLength(0); i++)
+            for (int i=1; i<this.cells.GetLength(0); i++)
             {
-                this.blocks[i].Position = ArrayOperations.SubtractArray(this.blocks[i].Position,this.blocks[0].Position);
-                this.blocks[i].Position = ArrayOperations.MultArrayByMatrix(this.blocks[i].Position,rotationMatrix);
-                this.blocks[i].Position = ArrayOperations.SumArray(this.blocks[i].Position, this.blocks[0].Position);
+                this.cells[i].Position = ArrayOperations.SubtractArray(this.cells[i].Position,this.cells[0].Position);
+                this.cells[i].Position = ArrayOperations.MultArrayByMatrix(this.cells[i].Position,rotationMatrix);
+                this.cells[i].Position = ArrayOperations.SumArray(this.cells[i].Position, this.cells[0].Position);
             }
         }
 
+        //Check if figure can be placed
+        
+
         public abstract void InitFigureCoordinates(int[] pivot);
+       
     }
 }

@@ -34,7 +34,6 @@ namespace Killer_Sudoku.TetrisFigures
                 newArray[i] = MultArray(array, ArrayExt.GetRow(matrix, i)).Sum();
             }
             return newArray;
-
         }
     }
 }
