@@ -17,15 +17,17 @@ namespace Killer_Sudoku.KillerSudokuBoard
         public Cell [,] board;
         public List<TetrisFigure> boardFigures = new List<TetrisFigure>();
         private string operation;
+        private int threads;
 
-        public Board(int size, string operation)
+        public Board(int size, string operation, int threads)
         {
+            this.threads = threads;
             this.size = size;
             this.values = ArrayExt.InitIntMatrix(size);
             this.board= new Cell[size, size];
             InitBoard(size);
-            KillerSudokuSolver.SudokuSolver sudoku = new SudokuSolver();
-            this.values = sudoku.GetSudokuBoard(size);
+            KillerSudokuSolver.SudokuSolver sudoku = new SudokuSolver(size, threads);
+            this.values = sudoku.GetSudokuBoard();
             this.operation = operation;
             fitTetrisFigures();
 
@@ -154,6 +156,7 @@ namespace Killer_Sudoku.KillerSudokuBoard
 
         public int ApplyOperation(int num, int result)
         {
+
             switch (this.operation)
             {
                 case "sum":

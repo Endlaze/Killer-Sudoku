@@ -49,6 +49,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenericBoard.cs" />
     <Compile Include="KillerSudokuSolver\SudokuSolver.cs" />
     <Compile Include="Utils\ArrayUtils.cs" />
     <Compile Include="KillerSudokuBoard\Board.cs" />

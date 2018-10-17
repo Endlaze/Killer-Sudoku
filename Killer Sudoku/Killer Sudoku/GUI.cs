@@ -161,7 +161,7 @@ namespace Killer_Sudoku
         private void start_button_Click(object sender, EventArgs e)
         {
             int size = Int32.Parse(size_input.Text);
-            this.killer = new Board(size, "sum");
+            this.killer = new Board(size, "sum", 1);
             
             List<TetrisFigure> boardFigures = this.killer.boardFigures;
            

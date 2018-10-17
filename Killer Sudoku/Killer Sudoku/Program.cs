@@ -3,6 +3,7 @@ using System;
 using Killer_Sudoku.KillerSudokuSolver;
 using Killer_Sudoku.KillerSudokuBoard;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Killer_Sudoku
 {
@@ -14,22 +15,25 @@ namespace Killer_Sudoku
         [STAThread]
         static void Main()
         {
-             Application.EnableVisualStyles();
-             Application.SetCompatibleTextRenderingDefault(false);
-             Application.Run(new GUI());
+            /*Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new GUI());*/
 
-          
 
-            //SudokuSolver solver = new SudokuSolver();
-            // solver.Main();
-           
 
-            Board board = new Board(5, "mult");
+            Board board = new Board(5, "sum", 1);
             board.fitTetrisFigures();
-          
 
+            foreach (var item in board.boardFigures)
+            {
+                foreach (var caca in item.Positions)
+                {
+                    ArrayExt.PrintArray(caca.Position);
+                }
+                Console.WriteLine("Operacion " + item.Result);
+            }
             
-           
+
         }
     }
 }
