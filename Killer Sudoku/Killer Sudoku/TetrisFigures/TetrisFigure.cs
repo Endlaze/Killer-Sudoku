@@ -15,7 +15,14 @@ namespace Killer_Sudoku
         private int result;
         private bool solving;
         private int maxRotation;
-       
+        private string operation;
+
+        //MaxRotation setter & getter
+        public string Operation
+        {
+            get { return this.operation; }
+            set { this.operation = value; }
+        }
 
         //MaxRotation setter & getter
         public int MaxRotation

@@ -154,7 +154,7 @@ namespace Killer_Sudoku
         {
             int size = Int32.Parse(size_input.Text);
             int threads = Int32.Parse(thread_input.Text);
-            this.killer = new Board(size, "sum", threads);
+            this.killer = new Board(size, threads);
 
             List<TetrisFigure> boardFigures = this.killer.boardFigures;
 

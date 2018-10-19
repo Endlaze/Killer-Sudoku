@@ -23,9 +23,6 @@ namespace Killer_Sudoku
             Application.Run(new GUI());*/
 
 
-
-            Board board = new Board(5, "sum", 1);
-            board.fitTetrisFigures();
         }
     }
 }
