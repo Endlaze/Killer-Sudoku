@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GenericBoard.cs" />
+    <Compile Include="KillerSudokuSolver\KillerSudokuSolver.cs" />
     <Compile Include="KillerSudokuSolver\SudokuSolver.cs" />
     <Compile Include="TetrisFigures\Permutations.cs" />
     <Compile Include="Utils\ArrayUtils.cs" />
