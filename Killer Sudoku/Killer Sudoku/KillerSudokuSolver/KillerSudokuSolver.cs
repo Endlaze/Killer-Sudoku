@@ -125,7 +125,6 @@ namespace Killer_Sudoku.KillerSudokuSolver
         }
 
         private bool IsInCol(int col, int number, int[,] tablero)
-
         {
             for (int row = 0; row < length; row++)
             {
@@ -136,6 +135,8 @@ namespace Killer_Sudoku.KillerSudokuSolver
             }
             return false;
         }
+        
+        
     }
     
 }
