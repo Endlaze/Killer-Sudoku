@@ -58,6 +58,44 @@ namespace Killer_Sudoku.TetrisFigures
             }
             return newList;
         }
+
+        public List<List<int>> GetFigureMulPermutations(int number, int figureSize)
+        {
+            List<List<int>> multiplyPermutations = new List<List<int>>();
+            IEnumerable<IEnumerable<int>> permutations = GetMulPermutations(GetDivisors(number), figureSize);
+            foreach (var item in permutations)
+            {
+                if (item.Aggregate((x, y) => x * y) == number)
+                {
+                    multiplyPermutations.Add(item.ToList());
+
+                }
+
+            }
+            return multiplyPermutations;
+        }
+
+        public static List<int> GetDivisors(int number)
+        {
+            List<int> divisors = new List<int>();
+            for (int i = 1; i <= 7; i++)
+            {
+                if (number % i == 0)
+                {
+                    divisors.Add(i);
+                }
+            }
+            return divisors;
+        }
+
+        static IEnumerable<IEnumerable<T>>
+            GetMulPermutations<T>(IEnumerable<T> list, int largo)
+        {
+            if (largo == 1) return list.Select(t => new T[] { t });
+            return GetMulPermutations(list, largo - 1)
+            .SelectMany(t => list.Where(o => !t.Contains(o)),
+            (t1, t2) => t1.Concat(new T[] { t2 }));
+        }
     }
 }
 
