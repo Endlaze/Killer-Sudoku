@@ -72,7 +72,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
                     }
                 }
                 Console.WriteLine("No encontre nada, Back");
-                tablero = SetNumbersInBoard(new List<int>(figuresToSolve[figureIndex].Positions.Length), figuresToSolve[figureIndex], tablero);
+                tablero = SetNumbersInBoard(Utils.Utils.InitListWithNumber(0, figuresToSolve[figureIndex].Positions.Length), figuresToSolve[figureIndex], tablero);
                 figuresToSolve[figureIndex].UsedPermutations = Utils.Utils.InitListWithIndices(figuresToSolve[figureIndex].Positions.Length);
                 return false;
             }

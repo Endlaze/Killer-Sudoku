@@ -43,5 +43,10 @@ namespace Killer_Sudoku.Utils
         {
             return Enumerable.Range(0, maxRange).ToList();
         }
+
+        public static List<int> InitListWithNumber(int number, int size)
+        {
+            return new List<int> (Enumerable.Repeat(number, size).ToList());
+        }
     } 
 }
