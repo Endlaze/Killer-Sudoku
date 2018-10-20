@@ -16,6 +16,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
         GenericBoard[] boardList;
         int threads;
         List <TetrisFigure> figuresToSolve;
+
         public KillerSudokuSolver(int length, int threads, Board killerBoard)
         {
             this.figuresToSolve = killerBoard.boardFigures;
@@ -35,16 +36,31 @@ namespace Killer_Sudoku.KillerSudokuSolver
            
         }
 
-        public bool solveSudoku(int figure)
+        public bool solveSudoku(int figureIndex)
         {
-            if (figure == figuresToSolve.Count)
+            if (figureIndex == figuresToSolve.Count)
             {
                 return true;
             }
             else
             {
-                
+                for (int i = 0; i < figuresToSolve[figureIndex].permutations; i++)
+                {
+                    if (PermutationIsValid(GetPermutation(figureIndex)))
+                    {
+                        if (solveSudoku(++figureIndex) == true)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                return false;
             }
+        }
+        private List<int> GetPermutation(int figureIndex)
+        {
+            Random rnd = new Random();
+            
         }
 
 
