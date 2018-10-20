@@ -5,6 +5,8 @@ using Killer_Sudoku.KillerSudokuBoard;
 using System.Windows.Forms;
 using System.Threading;
 using System.Collections.Generic;
+
+using Killer_Sudoku.TetrisFigures;
 using System.Linq;
 
 namespace Killer_Sudoku
@@ -20,6 +22,7 @@ namespace Killer_Sudoku
             /*Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new GUI());*/
+
             List<List<int>> list = new List<List<int>>();
             IEnumerable < IEnumerable < int >> test = GetPermutations(GetDivisors(20),3);
             foreach (var item in test)
@@ -39,6 +42,7 @@ namespace Killer_Sudoku
                 }
                 Console.WriteLine(" ");
             }
+
 
         }
         public static List<int> GetDivisors(int number)

@@ -17,10 +17,9 @@ namespace Killer_Sudoku.KillerSudokuBoard
         public int[,] values;
         public Cell [,] board;
         public List<TetrisFigure> boardFigures = new List<TetrisFigure>();
-        private string operation;
         private int threads;
 
-        public Board(int size, string operation, int threads)
+        public Board(int size, int threads)
         {
             this.threads = threads;
             this.size = size;
@@ -29,7 +28,6 @@ namespace Killer_Sudoku.KillerSudokuBoard
             InitBoard(size);
             KillerSudokuSolver.SudokuSolver sudoku = new SudokuSolver(size, threads);
             this.values = sudoku.GetSudokuBoard();
-            this.operation = operation;
             fitTetrisFigures();
 
         }
@@ -68,7 +66,9 @@ namespace Killer_Sudoku.KillerSudokuBoard
         }
 
         public TetrisFigure figureThatFits(int [] pivot)
-        {   string[] figures = { "block", "gun", "skew", "straight", "straight", "straight" };
+        {
+            string[] operations = { "sum", "mult" };
+            string[] figures = { "block", "gun", "skew", "straight", "straight", "straight" };
             int[] figuresSizes = { 0, 0, 0, 3, 2, 1 };
             int cont = 1;
             int rotated = 0;
@@ -93,7 +93,8 @@ namespace Killer_Sudoku.KillerSudokuBoard
                     rotated = 0;
                 }
             }
-            
+            figure.Operation = operations[new Random().Next(0,operations.Length)];
+
 
             return figure;
         }
@@ -133,7 +134,7 @@ namespace Killer_Sudoku.KillerSudokuBoard
             
             int result = 0;
            
-            if (this.operation.Equals("mult"))
+            if (figure.Operation.Equals("mult"))
             {
                 result = 1;
             }
@@ -141,7 +142,7 @@ namespace Killer_Sudoku.KillerSudokuBoard
             foreach (Cell cell in figure.Positions)
             {
                 cell.PartOfAFigure = true;
-                result = ApplyOperation(values[cell.Position[0], cell.Position[1]], result);
+                result = ApplyOperation(values[cell.Position[0], cell.Position[1]], result, figure.Operation);
                 board[cell.Position[0], cell.Position[1]] = cell;
             }
 
@@ -151,10 +152,10 @@ namespace Killer_Sudoku.KillerSudokuBoard
             
         }
 
-        public int ApplyOperation(int num, int result)
+        public int ApplyOperation(int num, int result, string operation)
         {
 
-            switch (this.operation)
+            switch (operation)
             {
                 case "sum":
                     return result + num;

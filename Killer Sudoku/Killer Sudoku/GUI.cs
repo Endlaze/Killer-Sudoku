@@ -34,20 +34,20 @@ namespace Killer_Sudoku
 
             var graphics = Graphics.FromImage(image);
             graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
-            graphics.DrawString(text,font, Brushes.Black, new Point(xCoordinate,yCoordinate));
+            graphics.DrawString(text, font, Brushes.Black, new Point(xCoordinate, yCoordinate));
             pictureBox.Image = image;
 
         }
 
-        private PictureBox [,] CreateBoard(int positionX, int positionY, int size, int blockSize)
+        private PictureBox[,] CreateBoard(int positionX, int positionY, int size, int blockSize)
         {
             PictureBox[,] board = new PictureBox[size, size];
-            for (int i=0; i<size; i++)
+            for (int i = 0; i < size; i++)
             {
-                for (int j=0; j<size; j++)
+                for (int j = 0; j < size; j++)
                 {
-                    board[i,j] = new PictureBox();
-                    board[i,j].Location = new Point(i * blockSize + positionX, j * blockSize + positionY);
+                    board[i, j] = new PictureBox();
+                    board[i, j].Location = new Point(i * blockSize + positionX, j * blockSize + positionY);
                     board[i, j].Width = blockSize;
                     board[i, j].Height = blockSize;
                     board[i, j].Visible = true;
@@ -62,7 +62,7 @@ namespace Killer_Sudoku
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace Killer_Sudoku
 
         }
 
-        
+
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -103,7 +103,7 @@ namespace Killer_Sudoku
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Console.WriteLine( openFileDialog1.FileName);
+                Console.WriteLine(openFileDialog1.FileName);
             }
 
 
@@ -121,7 +121,7 @@ namespace Killer_Sudoku
 
         private void thread_input_KeyPress(object sender, KeyPressEventArgs e)
         {
-            checkKeyPress(sender, e);   
+            checkKeyPress(sender, e);
         }
 
         private void size_input_KeyPress(object sender, KeyPressEventArgs e)
@@ -129,14 +129,14 @@ namespace Killer_Sudoku
             checkKeyPress(sender, e);
         }
 
-        private void checkKeyPress (object sender, KeyPressEventArgs e)
+        private void checkKeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) )
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
 
-            
+
 
         }
 
@@ -154,10 +154,10 @@ namespace Killer_Sudoku
         {
             int size = Int32.Parse(size_input.Text);
             int threads = Int32.Parse(thread_input.Text);
-            this.killer = new Board(size, "sum",threads);
-            
+            this.killer = new Board(size, threads);
+
             List<TetrisFigure> boardFigures = this.killer.boardFigures;
-           
+
             board1 = CreateBoard(10, 70, size, 26);
             board2 = CreateBoard(560, 70, size, 26);
 
@@ -172,12 +172,9 @@ namespace Killer_Sudoku
 
             foreach (var figure in boardFigures)
             {
-                drawOnPictureBox(figure.Result.ToString(), board1[figure.Positions[0].Position[0], figure.Positions[0].Position[1]], 0,0);
+                drawOnPictureBox(figure.Result.ToString(), board1[figure.Positions[0].Position[0], figure.Positions[0].Position[1]], 0, 0);
                 drawOnPictureBox(figure.Result.ToString(), board2[figure.Positions[0].Position[0], figure.Positions[0].Position[1]], 0, 0);
-
             }
-            
         }
     }
-
 }

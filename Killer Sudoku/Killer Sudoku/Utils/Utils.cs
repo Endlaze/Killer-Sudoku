@@ -33,7 +33,6 @@ namespace Killer_Sudoku.Utils
                 int g = rand2.Next(100, 255);
                 int b = rand2.Next(100, 255);
                 newColor =Color.FromArgb(r, g, b);
-                Console.WriteLine("Red: {0} Green {1} Blue {2}", r, g, b);
             }
             
 
