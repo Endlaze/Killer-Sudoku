@@ -59,10 +59,10 @@ namespace Killer_Sudoku.TetrisFigures
             return newList;
         }
 
-        public List<List<int>> GetFigureMulPermutations(int number, int figureSize)
+        public List<List<int>> GetFigureMulPermutations(int number, int figureSize, int boardLength)
         {
             List<List<int>> multiplyPermutations = new List<List<int>>();
-            IEnumerable<IEnumerable<int>> permutations = GetMulPermutations(GetDivisors(number), figureSize);
+            IEnumerable<IEnumerable<int>> permutations = GetMulPermutations(GetDivisors(number, boardLength), figureSize);
             foreach (var item in permutations)
             {
                 if (item.Aggregate((x, y) => x * y) == number)
@@ -75,10 +75,10 @@ namespace Killer_Sudoku.TetrisFigures
             return multiplyPermutations;
         }
 
-        public static List<int> GetDivisors(int number)
+        public static List<int> GetDivisors(int number, int boardLenght)
         {
             List<int> divisors = new List<int>();
-            for (int i = 1; i <= 7; i++)
+            for (int i = 1; i <= boardLenght; i++)
             {
                 if (number % i == 0)
                 {
