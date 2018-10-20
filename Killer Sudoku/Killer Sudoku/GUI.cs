@@ -53,7 +53,7 @@ namespace Killer_Sudoku
                     board[i, j].Visible = true;
                     board[i, j].BorderStyle = BorderStyle.FixedSingle;
                     board[i, j].BringToFront();
-                    board[i, j].Image = new Bitmap(size, size);
+                    board[i, j].Image = new Bitmap(blockSize, blockSize);
                     this.Controls.Add(board[i, j]);
                 }
             }
@@ -158,22 +158,22 @@ namespace Killer_Sudoku
 
             List<TetrisFigure> boardFigures = this.killer.boardFigures;
 
-            board1 = CreateBoard(10, 70, size, 26);
-            board2 = CreateBoard(560, 70, size, 26);
+            board1 = CreateBoard(10, 70, size, 33);
+            
 
             foreach (var figure in boardFigures)
             {
                 foreach (var cell in figure.Positions)
                 {
                     drawColors(board1[cell.Position[0], cell.Position[1]], figure.Color);
-                    drawColors(board2[cell.Position[0], cell.Position[1]], figure.Color);
+                    
                 }
             }
 
             foreach (var figure in boardFigures)
             {
                 drawOnPictureBox(figure.Result.ToString(), board1[figure.Positions[0].Position[0], figure.Positions[0].Position[1]], 0, 0);
-                drawOnPictureBox(figure.Result.ToString(), board2[figure.Positions[0].Position[0], figure.Positions[0].Position[1]], 0, 0);
+               
             }
         }
     }
