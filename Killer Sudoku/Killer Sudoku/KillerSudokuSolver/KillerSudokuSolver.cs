@@ -37,37 +37,8 @@ namespace Killer_Sudoku.KillerSudokuSolver
         }
 
 
-        public bool solveSudoku(int figureIndex)
-
-        {
-            if (figureIndex == figuresToSolve.Count)
-            {
-                return true;
-            }
-            else
-            {
-                for (int i = 0; i < figuresToSolve[figureIndex].FigurePermutations.Count; i++)
-                {
-                    if (PermutationIsValid(GetPermutation(figureIndex)))
-                    {
-                        if (solveSudoku(++figureIndex) == true)
-                        {
-                            return true;
-                        }
-                    }
-                }
-                return false;
-            }
-
         
-
-        }
-        private List<int> GetPermutation(int figureIndex)
-        {
-            Random rnd = new Random();
-            
-        }
-
+        
 
 
 
