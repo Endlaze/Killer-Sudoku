@@ -35,7 +35,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
            
         }
 
-        public bool solveSudoku(int figure)
+       /* public bool solveSudoku(int figure)
         {
             if (figure == figuresToSolve.Count)
             {
@@ -45,7 +45,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
             {
                 
             }
-        }
+        }*/
 
 
 
@@ -71,6 +71,14 @@ namespace Killer_Sudoku.KillerSudokuSolver
                 }
             }
             return false;
+        }
+
+        private void setPermutationsForAllFigures()
+        {
+            foreach (var figure in figuresToSolve)
+            {
+                figure.SetFigurePermutations(this.length);
+            }
         }
         
         
