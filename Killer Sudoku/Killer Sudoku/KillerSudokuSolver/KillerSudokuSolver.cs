@@ -49,20 +49,21 @@ namespace Killer_Sudoku.KillerSudokuSolver
                 for (int i = 0; i < figuresToSolve[figureIndex].FigurePermutations.Count; i++)
                 {
 
-                    if (PermutationIsValid(GetPermutation(figureIndex), figuresToSolve[figureIndex].Positions , tablero))
+                    if (PermutationIsValid(GetPermutation(figureIndex), figuresToSolve[figureIndex].Positions , tablero, figureIndex))
                     {
-
+                        
                         if (solveSudoku(++figureIndex, tablero) == true)
                         {
                             return true;
                         }
                     }
                 }
+                SetNumbersInBoard(new List<int>(figuresToSolve[figureIndex].Positions.Length), figuresToSolve[figureIndex], tablero);
                 figuresToSolve[figureIndex].UsedPermutations = Utils.Utils.InitListWithIndices(figuresToSolve[figureIndex].Positions.Length);
                 return false;
             }
         }
-        private bool PermutationIsValid (List<int> permutation, Cell[] positions, int[,] tablero)
+        private bool PermutationIsValid (List<int> permutation, Cell[] positions, int[,] tablero, int index)
         {
             for (int i = 0; i< positions.Length; i++)
             {
@@ -71,6 +72,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
                     return false;
                 }
             }
+            SetNumbersInBoard(permutation, figuresToSolve[index], tablero);
             return true;
         }
         private List<int> GetPermutation(int figureIndex)
@@ -106,7 +108,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
             return false;
         }
 
-        private void setPermutationsForAllFigures()
+        private void SetPermutationsForAllFigures()
         {
             foreach (var figure in figuresToSolve)
             {
@@ -114,7 +116,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
             }
         }
 
-        private int[,] setNumbersInBoard(List<int> permutation, TetrisFigure figure,  int [,] tablero)
+        private int[,] SetNumbersInBoard(List<int> permutation, TetrisFigure figure,  int [,] tablero)
         {
             for (int i = 0; i < figure.Positions.Length; i++)
             {
