@@ -11,7 +11,7 @@ namespace Killer_Sudoku.TetrisFigures.Figures
         public override void InitFigureCoordinates(int[] pivot)
         {
             MaxRotation = 3;
-            int[,] blockCoordinates = { { pivot[0], pivot[1] }, { pivot[0] + 1, pivot[1] }, { pivot[0], pivot[1] + 1 }};
+            int[,] blockCoordinates = { { pivot[0], pivot[1] }, { pivot[0], pivot[1]+1 }, { pivot[0]+1, pivot[1] + 1 }};
             InitCells(blockCoordinates);
         }
     }

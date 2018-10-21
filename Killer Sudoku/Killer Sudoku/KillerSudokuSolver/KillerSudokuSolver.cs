@@ -113,8 +113,15 @@ namespace Killer_Sudoku.KillerSudokuSolver
                 figure.SetFigurePermutations(this.length);
             }
         }
-        
-        
+
+        private int[,] setNumbersInBoard(List<int> permutation, TetrisFigure figure,  int [,] tablero)
+        {
+            for (int i = 0; i < figure.Positions.Length; i++)
+            {
+                tablero[figure.Positions.ElementAt(i).Position[0], figure.Positions.ElementAt(i).Position[1]] = permutation.ElementAt(i);
+            }
+            return tablero;
+        }
     }
     
 }
