@@ -76,7 +76,7 @@ namespace Killer_Sudoku.TetrisFigures
 
         
 
-        public static List<List<int>> GetFigurePermutations(int number, int figureSize, int boardLength, string operation)
+        public static List<List<int>> GetFigurePermutations(int number, int figureSize, int boardLength, string operation, string type)
         {
             List<List<int>> multiplyPermutations = new List<List<int>>();
             if (operation == "mult")
@@ -89,8 +89,11 @@ namespace Killer_Sudoku.TetrisFigures
                 {
                     if (partialPermutation.Aggregate((x,y) =>  getOperation(x, y, operation)) == numberToReach)
                     {
-                        multiplyPermutations.Add(new List<int>(partialPermutation.ToArray()));
-                        return true;
+                        if (!StraightContainsDuplicates(new List<int>(partialPermutation.ToArray()), type))
+                        {
+                            multiplyPermutations.Add(new List<int>(partialPermutation.ToArray()));
+                            return true;
+                        }
                     }
                     return true;
                 }
@@ -115,8 +118,17 @@ namespace Killer_Sudoku.TetrisFigures
                     return a * b;
                 default:
                     return 0;
-
             }
+        }
+
+        private static bool StraightContainsDuplicates(List<int> list, string figureType)
+        {
+            if ((list.Count != list.Distinct().Count()) && (figureType.Equals("straight")))
+            {
+                return true;
+            }
+            
+            return false;
         }
 
 

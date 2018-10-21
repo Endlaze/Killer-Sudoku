@@ -31,6 +31,8 @@ namespace Killer_Sudoku.KillerSudokuBoard
             fitTetrisFigures();
             boardFigures = boardFigures.OrderBy(x => x.Positions.Length).ToList();
 
+
+
         }
 
         //Function to init the board

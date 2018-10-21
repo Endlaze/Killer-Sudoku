@@ -13,7 +13,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
         Random random = new Random();
         static bool isCompleted = false;
         int length;
-        int[,] board = new int[8,8];
+        int[,] board = new int[12,12];
         GenericBoard[] boardList;
         int threads;
         List<TetrisFigure> figuresToSolve;
@@ -25,6 +25,14 @@ namespace Killer_Sudoku.KillerSudokuSolver
             this.length = length;
             boardList = new GenericBoard[length];
             SetPermutationsForAllFigures();
+            
+
+            foreach (var item in figuresToSolve)
+            {
+                Console.WriteLine("Tama;o {0}       Permutaciones {1}", item.Positions.Length, item.FigurePermutations.Count); 
+
+            }
+
             solveSudoku(0, board);
         }
 
@@ -46,7 +54,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
                 return true;
             }
             figuresToSolve[figureIndex].UsedPermutations = Utils.Utils.InitListWithIndices(figuresToSolve[figureIndex].FigurePermutations.Count);
-            if (figuresToSolve[figureIndex].Positions.Length == 1)
+            if (figuresToSolve[figureIndex].Positions.Length == 1 )
             {
                 tablero[figuresToSolve[figureIndex].Positions.ElementAt(0).Position[0],
                     figuresToSolve[figureIndex].Positions.ElementAt(0).Position[1]] = figuresToSolve[figureIndex].Result;
@@ -60,14 +68,14 @@ namespace Killer_Sudoku.KillerSudokuSolver
             else
             {
                 
-                Console.WriteLine("LA FIGURA {0} HARA EL CICLO {1} VECES", figureIndex, figuresToSolve[figureIndex].FigurePermutations.Count);
+                //Console.WriteLine("LA FIGURA {0} HARA EL CICLO {1} VECES", figureIndex, figuresToSolve[figureIndex].FigurePermutations.Count);
                 for (int i = 0; i < figuresToSolve[figureIndex].FigurePermutations.Count; i++)
                 {
                     
                     if (PermutationIsValid(GetPermutation(figureIndex), figuresToSolve[figureIndex].Positions , tablero, figureIndex))
                     {
-                        ArrayExt.Print2DArray(tablero);
-                        Console.WriteLine("");
+                       // ArrayExt.Print2DArray(tablero);
+                        //Console.WriteLine("");
                         if (solveSudoku(++figureIndex, tablero) == true)
                         {
                             return true;
@@ -79,14 +87,14 @@ namespace Killer_Sudoku.KillerSudokuSolver
                         }
                     }
                 }
-                Console.WriteLine("No encontre nada, este es el tablero antes de borrar");
-                ArrayExt.Print2DArray(tablero);
-                Console.WriteLine("");
+               // Console.WriteLine("No encontre nada, este es el tablero antes de borrar");
+                //ArrayExt.Print2DArray(tablero);
+                //Console.WriteLine("");
                 tablero = SetNumbersInBoard(Utils.Utils.InitListWithNumber(0, figuresToSolve[figureIndex].Positions.Length), figuresToSolve[figureIndex], tablero);
                 figuresToSolve[figureIndex].UsedPermutations = Utils.Utils.InitListWithIndices(figuresToSolve[figureIndex].FigurePermutations.Count);
-                Console.WriteLine("TABLERO BORRADO");
-                ArrayExt.Print2DArray(tablero);
-                Console.WriteLine("");
+                //Console.WriteLine("TABLERO BORRADO");
+                //ArrayExt.Print2DArray(tablero);
+                //Console.WriteLine("");
                 return false;
             }
         }
@@ -95,8 +103,8 @@ namespace Killer_Sudoku.KillerSudokuSolver
             
             for (int i = 0; i< positions.Length; i++)
             {
-                ArrayExt.Print2DArray(tablero);
-                Console.WriteLine("");
+               // ArrayExt.Print2DArray(tablero);
+               // Console.WriteLine("");
                 if (IsInRow(positions[i].Position[0], permutation[i], tablero) || IsInCol(positions[i].Position[1], permutation[i], tablero))
                 {
                     return false;
@@ -108,18 +116,18 @@ namespace Killer_Sudoku.KillerSudokuSolver
         private List<int> GetPermutation(int figureIndex)
         {
 
-            Console.WriteLine("FIGURA #{0}", figureIndex);
+            //Console.WriteLine("FIGURA #{0}", figureIndex);
             int index = random.Next(0, figuresToSolve.ElementAt(figureIndex).UsedPermutations.Count);
-            Console.WriteLine("{0}    {1}",index, figuresToSolve.ElementAt(figureIndex).UsedPermutations.Count);
+            //Console.WriteLine("{0}    {1}",index, figuresToSolve.ElementAt(figureIndex).UsedPermutations.Count);
             int number = figuresToSolve.ElementAt(figureIndex).UsedPermutations.ElementAt(index);
             figuresToSolve.ElementAt(figureIndex).UsedPermutations.RemoveAt(index);
-            Console.WriteLine("Permutacion que intenta usar");
-            ArrayExt.PrintArray(figuresToSolve.ElementAt(figureIndex).FigurePermutations.ElementAt(number).ToArray());
-            Console.WriteLine("En las posiciones");
-            foreach (var item in figuresToSolve.ElementAt(figureIndex).Positions)
+            //Console.WriteLine("Permutacion que intenta usar");
+            //ArrayExt.PrintArray(figuresToSolve.ElementAt(figureIndex).FigurePermutations.ElementAt(number).ToArray());
+            //Console.WriteLine("En las posiciones");
+          /*  foreach (var item in figuresToSolve.ElementAt(figureIndex).Positions)
             {
                 ArrayExt.PrintArray(item.Position);
-            }
+            }*/
             
             return figuresToSolve.ElementAt(figureIndex).FigurePermutations.ElementAt(number);
         }
@@ -153,7 +161,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
         {
             foreach (var figure in figuresToSolve)
             {
-                figure.SetFigurePermutations(this.length);
+                figure.SetFigurePermutations(this.length, figure.Type);
             }
         }
 

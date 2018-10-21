@@ -11,6 +11,7 @@ namespace Killer_Sudoku.TetrisFigures.Figures
         int size;
         public Straight(int size) {
             this.size = size;
+            Type = "straight";
         }
 
         public override void InitFigureCoordinates(int[] pivot)

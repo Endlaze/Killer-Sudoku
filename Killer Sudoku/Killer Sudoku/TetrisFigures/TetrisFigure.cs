@@ -16,6 +16,7 @@ namespace Killer_Sudoku
         private bool solving;
         private int maxRotation;
         private string operation;
+        private string type;
         List<List<int>> figurePermutations;
         List<int> usedPermutations;
 
@@ -24,6 +25,13 @@ namespace Killer_Sudoku
         {
             get { return this.usedPermutations; }
             set { this.usedPermutations = value; }
+        }
+
+        //UsedPermutations setter & getter
+        public string Type
+        {
+            get { return this.type; }
+            set { this.type = value; }
         }
 
         //FigurePermutations setter & getter
@@ -98,15 +106,15 @@ namespace Killer_Sudoku
             }
         }
 
-        public void SetFigurePermutations(int boardSize)
+        public void SetFigurePermutations(int boardSize, string type)
         {
             switch (this.operation)
             {
                 case "sum":
-                    this.figurePermutations = Permutations.GetFigurePermutations(this.result, this.Positions.Length, boardSize,"sum");
+                    this.figurePermutations = Permutations.GetFigurePermutations(this.result, this.Positions.Length, boardSize,"sum", type);
                     break;
                 case "mult":
-                    this.figurePermutations = Permutations.GetFigurePermutations(this.result, this.Positions.Length, boardSize, "mult");
+                    this.figurePermutations = Permutations.GetFigurePermutations(this.result, this.Positions.Length, boardSize, "mult", type);
                     break;
                 default:
                     break;
