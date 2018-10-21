@@ -48,6 +48,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
             {
                 for (int i = 0; i < figuresToSolve[figureIndex].FigurePermutations.Count; i++)
                 {
+
                     if (PermutationIsValid(GetPermutation(figureIndex), figuresToSolve[figureIndex].Positions , tablero))
                     {
 
@@ -57,13 +58,13 @@ namespace Killer_Sudoku.KillerSudokuSolver
                         }
                     }
                 }
-                figuresToSolve[figureIndex].UsedPermutations = Utils.Utils.
+                figuresToSolve[figureIndex].UsedPermutations = Utils.Utils.InitListWithIndices(figuresToSolve[figureIndex].Positions.Length);
                 return false;
             }
         }
         private bool PermutationIsValid (List<int> permutation, Cell[] positions, int[,] tablero)
         {
-            for (int i = 0; i< positions.Count(); i++)
+            for (int i = 0; i< positions.Length; i++)
             {
                 if (IsInRow(positions[i].Position[0], permutation[i], tablero) || IsInCol(positions[i].Position[1], permutation[i], tablero))
                 {
