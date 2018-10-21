@@ -74,18 +74,62 @@ namespace Killer_Sudoku.TetrisFigures
             return true;
         }
 
-        public static List<List<int>> GetFigureMulPermutations(int number, int figureSize, int boardLength)
+        
+
+        public static List<List<int>> GetFigurePermutations(int number, int figureSize, int boardLength, string operation)
         {
             List<List<int>> multiplyPermutations = new List<List<int>>();
-            IEnumerable<IEnumerable<int>> permutations = GetMulPermutations(GetDivisors(number, boardLength), figureSize);
-            foreach (var item in permutations)
+            if (operation == "mult")
+                permutation(GetDivisors(number, boardLength), number, Utils.Utils.InitListWithNumber(0, figureSize), 0);
+            if(operation == "sum")
+                permutation(Utils.Utils.InitListWithIndices(boardLength,1), number, Utils.Utils.InitListWithNumber(0, figureSize), 0);
+            bool permutation(List<int> divisors, int numberToReach, List<int> partialPermutation,int limit)
             {
-                if (item.Aggregate((x, y) => x * y) == number)
+                if (limit == figureSize)
                 {
-                    multiplyPermutations.Add(item.ToList());
+                    if (partialPermutation.Aggregate((x,y) =>  getOperation(x, y, operation)) == numberToReach)
+                    {
+                        multiplyPermutations.Add(new List<int>(partialPermutation.ToArray()));
+                        return true;
+                    }
+                    return true;
+                }
+                for (int i = 0; i < divisors.Count; i++)
+                {
+                    partialPermutation[limit] = divisors[i];
+                    permutation(divisors, numberToReach, partialPermutation, ++limit);
+                    --limit;
+                }
+                return true;
+            }
+
+            return multiplyPermutations.Where((x) => different(x)).ToList();
+        }
+        private static int getOperation(int a, int b, string operation)
+        {
+            switch (operation)
+            {
+                case "sum":
+                    return a + b;
+                case "mult":
+                    return a * b;
+                default:
+                    return 0;
+
+            }
+        }
+
+
+        private static bool different(List<int> lista)
+        {
+            for (int i = 0; i < lista.Count-1; i++)
+            {
+                if(lista[i] == lista[i + 1])
+                {
+                    return false;
                 }
             }
-            return multiplyPermutations;
+            return true;
         }
 
         public static List<int> GetDivisors(int number, int boardLenght)
@@ -101,14 +145,7 @@ namespace Killer_Sudoku.TetrisFigures
             return divisors;
         }
 
-        static IEnumerable<IEnumerable<T>>
-            GetMulPermutations<T>(IEnumerable<T> list, int largo)
-        {
-            if (largo == 1) return list.Select(t => new T[] { t });
-            return GetMulPermutations(list, largo - 1)
-            .SelectMany(t => list.Where(o => !t.Contains(o)),
-            (t1, t2) => t1.Concat(new T[] { t2 }));
-        }
+        
     }
 }
 

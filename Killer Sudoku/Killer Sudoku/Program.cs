@@ -22,8 +22,10 @@ namespace Killer_Sudoku
             /*Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new GUI());*/
-            Board board = new Board(5, 5);
-            KillerSudokuSolver.KillerSudokuSolver solving = new KillerSudokuSolver.KillerSudokuSolver(5,1,board);
+            Board board = new Board(8, 8);
+            ArrayExt.Print2DArray(board.values);
+            Console.WriteLine("Terminó de generar el board");
+            KillerSudokuSolver.KillerSudokuSolver solving = new KillerSudokuSolver.KillerSudokuSolver(8,1,board);
             ArrayExt.Print2DArray(solving.GetSudokuBoard());
 
         }   

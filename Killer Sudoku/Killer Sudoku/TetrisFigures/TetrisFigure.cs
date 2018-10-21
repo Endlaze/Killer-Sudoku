@@ -103,10 +103,10 @@ namespace Killer_Sudoku
             switch (this.operation)
             {
                 case "sum":
-                    this.figurePermutations = Permutations.GetFigureSumPermutations(this.result, this.Positions.Length, boardSize);
+                    this.figurePermutations = Permutations.GetFigurePermutations(this.result, this.Positions.Length, boardSize,"sum");
                     break;
                 case "mult":
-                    this.figurePermutations = Permutations.GetFigureMulPermutations(this.result, this.Positions.Length, boardSize);
+                    this.figurePermutations = Permutations.GetFigurePermutations(this.result, this.Positions.Length, boardSize, "mult");
                     break;
                 default:
                     break;

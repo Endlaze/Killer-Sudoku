@@ -39,9 +39,9 @@ namespace Killer_Sudoku.Utils
             return newColor;
         }
 
-        public static List<int> InitListWithIndices(int maxRange)
+        public static List<int> InitListWithIndices(int maxRange, int initial =0)
         {
-            return Enumerable.Range(0, maxRange).ToList();
+            return Enumerable.Range(initial, maxRange).ToList();
         }
 
         public static List<int> InitListWithNumber(int number, int size)
