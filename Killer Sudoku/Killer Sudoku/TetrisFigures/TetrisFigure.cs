@@ -19,7 +19,14 @@ namespace Killer_Sudoku
         List<List<int>> figurePermutations;
         List<int> usedPermutations;
 
-        //MaxRotation setter & getter
+        //UsedPermutations setter & getter
+        public List<int> UsedPermutations
+        {
+            get { return this.usedPermutations; }
+            set { this.usedPermutations = value; }
+        }
+
+        //FigurePermutations setter & getter
         public List<List<int>> FigurePermutations
         {
             get { return this.figurePermutations; }
