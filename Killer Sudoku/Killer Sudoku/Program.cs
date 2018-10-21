@@ -19,9 +19,12 @@ namespace Killer_Sudoku
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
+            /*Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GUI());
+            Application.Run(new GUI());*/
+            Board board = new Board(5, 5);
+            KillerSudokuSolver.KillerSudokuSolver solving = new KillerSudokuSolver.KillerSudokuSolver(5,1,board);
+            ArrayExt.Print2DArray(solving.GetSudokuBoard());
 
         }   
     }

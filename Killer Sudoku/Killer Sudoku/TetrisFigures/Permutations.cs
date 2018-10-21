@@ -9,10 +9,10 @@ namespace Killer_Sudoku.TetrisFigures
     public class Permutations
     {
         //Function to validate sum permutations
-        public static List<List<int>> GetFigureSumPermutations(int number, int figureSize)
+        public static List<List<int>> GetFigureSumPermutations(int number, int figureSize, int boardLenght)
         {
             List<List<int>> list = GetSumPermutations(number);
-            return FilterPermutations(list, figureSize);
+            return FilterPermutations(list, figureSize, boardLenght);
         }
 
         //Function to get sum permutations
@@ -23,19 +23,23 @@ namespace Killer_Sudoku.TetrisFigures
             
             for (int i = 1; i < number; i++)
             {
-                foreach (var sublist in GetSumPermutations(number-i))
+               
+                foreach (var sublist in GetSumPermutations(number - i))
                 {
-                    sublist.Insert(0,i);
+                    sublist.Insert(0, i);
                     list.Add(sublist);
                 }
+                
             }
             return list;
         }
 
         //Function to filter permutations, given a size
-        public static List<List<int>> FilterPermutations(List<List<int>> listToFilter, int figureSize)
+        public static List<List<int>> FilterPermutations(List<List<int>> listToFilter, int figureSize, int boardLenght)
         {
             listToFilter = listToFilter.Where(x => x.Count.Equals(figureSize)).ToList();
+            listToFilter = listToFilter.Where(x =>  isLess(x, boardLenght)).ToList();
+
             List<List<int>> newList = new List<List<int>>();
 
             for (int x = 0; x < listToFilter.Count; x++)
@@ -44,7 +48,7 @@ namespace Killer_Sudoku.TetrisFigures
                 
                 for (int y = 0; y < listToFilter.ElementAt(x).Count-1; y++)
                 {
-                    if (listToFilter.ElementAt(x).ElementAt(y).Equals(listToFilter.ElementAt(x).ElementAt(y+1)))
+                    if (listToFilter.ElementAt(x).ElementAt(y).Equals(listToFilter.ElementAt(x).ElementAt(y+1)) || listToFilter.ElementAt(x).ElementAt(y) > (boardLenght))
                     {
                         isEqual = true;
                         break;
@@ -57,6 +61,17 @@ namespace Killer_Sudoku.TetrisFigures
                 }
             }
             return newList;
+        }
+        public static bool isLess(List<int> listilla, int boardLength)
+        {
+            foreach (var item in listilla)
+            {
+                if(item> boardLength)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static List<List<int>> GetFigureMulPermutations(int number, int figureSize, int boardLength)
