@@ -14,7 +14,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
         Random random = new Random();
         static bool isCompleted = false;
         int length;
-        int[,] board = new int[15,15];
+        int[,] board = new int[19,19];
         GenericBoard[] boardList;
         int threads;
         List<TetrisFigure> figuresToSolve;
@@ -26,6 +26,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
             this.length = length;
             boardList = new GenericBoard[length];
             SetPermutationsForAllFigures();
+            figuresToSolve = figuresToSolve.OrderBy(x => x.FigurePermutations.Count).ToList();
 
 
             foreach (var item in figuresToSolve)
