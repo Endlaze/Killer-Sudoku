@@ -29,7 +29,7 @@ namespace Killer_Sudoku.KillerSudokuBoard
             KillerSudokuSolver.SudokuSolver sudoku = new SudokuSolver(size, threads);
             this.values = sudoku.GetSudokuBoard();
             fitTetrisFigures();
-            boardFigures = boardFigures.OrderBy(x => x.Positions.Length).ToList();
+            
 
 
 

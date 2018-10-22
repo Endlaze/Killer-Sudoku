@@ -10,10 +10,11 @@ namespace Killer_Sudoku.KillerSudokuSolver
 {
     class KillerSudokuSolver
     {
+        bool finish = false;
         Random random = new Random();
         static bool isCompleted = false;
         int length;
-        int[,] board = new int[12,12];
+        int[,] board = new int[15,15];
         GenericBoard[] boardList;
         int threads;
         List<TetrisFigure> figuresToSolve;
@@ -25,7 +26,7 @@ namespace Killer_Sudoku.KillerSudokuSolver
             this.length = length;
             boardList = new GenericBoard[length];
             SetPermutationsForAllFigures();
-            
+
 
             foreach (var item in figuresToSolve)
             {
@@ -33,6 +34,10 @@ namespace Killer_Sudoku.KillerSudokuSolver
 
             }
 
+            
+        }
+        public void start()
+        {
             solveSudoku(0, board);
         }
 
@@ -48,9 +53,14 @@ namespace Killer_Sudoku.KillerSudokuSolver
 
         public bool solveSudoku(int figureIndex, int[,] tablero)
         {
+            if (finish)
+            {
+                return true;
+            }
             
             if (figureIndex == figuresToSolve.Count)
             {
+                finish = true;
                 return true;
             }
             figuresToSolve[figureIndex].UsedPermutations = Utils.Utils.InitListWithIndices(figuresToSolve[figureIndex].FigurePermutations.Count);
