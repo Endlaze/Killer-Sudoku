@@ -14,19 +14,20 @@ namespace Killer_Sudoku.KillerSudokuSolver
         Random random = new Random();
         static bool isCompleted = false;
         int length;
-        int[,] board = new int[19,19];
+        int[,] board;
         GenericBoard[] boardList;
         int threads;
         List<TetrisFigure> figuresToSolve;
 
         public KillerSudokuSolver(int length, int threads, Board killerBoard)
         {
+            this.board = new int[length, length];
             this.figuresToSolve = killerBoard.boardFigures;
             this.threads = threads;
             this.length = length;
             boardList = new GenericBoard[length];
             SetPermutationsForAllFigures();
-            figuresToSolve = figuresToSolve.OrderBy(x => x.FigurePermutations.Count).ToList();
+            //figuresToSolve = figuresToSolve.OrderBy(x => x.Positions.Length).ToList();
 
 
             foreach (var item in figuresToSolve)

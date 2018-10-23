@@ -13,8 +13,11 @@ namespace Killer_Sudoku
 {
     public partial class GUI : Form
     {
-        PictureBox[,] board1 = new PictureBox[19, 19];
-        PictureBox[,] board2 = new PictureBox[19, 19];
+        PictureBox[,] board1;
+        
+        
+
+        KillerSudokuSolver.KillerSudokuSolver killerSudokuSolver;
         Board killer;
 
         public GUI()
@@ -41,7 +44,8 @@ namespace Killer_Sudoku
 
         private PictureBox[,] CreateBoard(int positionX, int positionY, int size, int blockSize)
         {
-            PictureBox[,] board = new PictureBox[size, size];
+            PictureBox [,]board = new PictureBox[size, size];
+            
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
@@ -150,14 +154,15 @@ namespace Killer_Sudoku
 
         }
 
-        private void start_button_Click(object sender, EventArgs e)
+        private void generate_button_Click(object sender, EventArgs e)
         {
+            
             int size = Int32.Parse(size_input.Text);
             int threads = Int32.Parse(thread_input.Text);
+            board1 = new PictureBox[size, size];
+
             this.killer = new Board(size, threads);
-
             List<TetrisFigure> boardFigures = this.killer.boardFigures;
-
             board1 = CreateBoard(10, 70, size, 33);
             
 
@@ -173,8 +178,41 @@ namespace Killer_Sudoku
             foreach (var figure in boardFigures)
             {
                 drawOnPictureBox(figure.Result.ToString(), board1[figure.Positions[0].Position[0], figure.Positions[0].Position[1]], 0, 0);
-               
+                if (figure.Operation.Equals("sum"))
+                {
+                    drawOnPictureBox("+", board1[figure.Positions[0].Position[0], figure.Positions[0].Position[1]], 24,0);
+                }
+                else
+                {
+                    drawOnPictureBox("x", board1[figure.Positions[0].Position[0], figure.Positions[0].Position[1]], 24, 0);
+                }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            int size = Int32.Parse(size_input.Text);
+            int threads = Int32.Parse(thread_input.Text);
+
+            this.killerSudokuSolver = new KillerSudokuSolver.KillerSudokuSolver(size, threads, this.killer);
+            this.killerSudokuSolver.start();
+            int[,] matrix = this.killerSudokuSolver.GetSudokuBoard();
+
+            ArrayExt.Print2DArray(matrix);
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    drawOnPictureBox(matrix[i,j].ToString(), board1[i, j], 14, 14);
+
+                }
+
+            }
+           // board1 = CreateBoard(10, 70, size, 33);
+
+            
         }
     }
 }

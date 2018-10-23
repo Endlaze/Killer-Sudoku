@@ -19,10 +19,10 @@ namespace Killer_Sudoku
         [STAThread]
         static void Main()
         {
-            /*Application.EnableVisualStyles();
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GUI());*/
-             Board board = new Board(19, 19);
+            Application.Run(new GUI());
+            /* Board board = new Board(19, 19);
              ArrayExt.Print2DArray(board.values);
              Console.WriteLine("Terminó de generar el board");
              KillerSudokuSolver.KillerSudokuSolver solving = new KillerSudokuSolver.KillerSudokuSolver(19, 1, board);
@@ -34,7 +34,7 @@ namespace Killer_Sudoku
                 Thread.Sleep(500);
                 Console.WriteLine("\n");
 
-            }
+            }*/
 
 
 

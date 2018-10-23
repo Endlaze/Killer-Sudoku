@@ -33,9 +33,10 @@ namespace Killer_Sudoku
         {
             this.killer_sudoku_label = new System.Windows.Forms.Label();
             this.options_panel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.save_killer = new System.Windows.Forms.Button();
             this.load_killer = new System.Windows.Forms.Button();
-            this.start_button = new System.Windows.Forms.Button();
+            this.generate_button = new System.Windows.Forms.Button();
             this.size_input = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.thread_label = new System.Windows.Forms.Label();
@@ -56,9 +57,10 @@ namespace Killer_Sudoku
             // 
             // options_panel
             // 
+            this.options_panel.Controls.Add(this.button1);
             this.options_panel.Controls.Add(this.save_killer);
             this.options_panel.Controls.Add(this.load_killer);
-            this.options_panel.Controls.Add(this.start_button);
+            this.options_panel.Controls.Add(this.generate_button);
             this.options_panel.Controls.Add(this.size_input);
             this.options_panel.Controls.Add(this.label1);
             this.options_panel.Controls.Add(this.thread_label);
@@ -67,6 +69,17 @@ namespace Killer_Sudoku
             this.options_panel.Name = "options_panel";
             this.options_panel.Size = new System.Drawing.Size(235, 383);
             this.options_panel.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(40, 292);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(155, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Solve";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // save_killer
             // 
@@ -90,16 +103,16 @@ namespace Killer_Sudoku
             this.load_killer.UseVisualStyleBackColor = true;
             this.load_killer.Click += new System.EventHandler(this.load_killer_Click);
             // 
-            // start_button
+            // generate_button
             // 
-            this.start_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.start_button.Location = new System.Drawing.Point(65, 274);
-            this.start_button.Name = "start_button";
-            this.start_button.Size = new System.Drawing.Size(111, 23);
-            this.start_button.TabIndex = 6;
-            this.start_button.Text = "Solve";
-            this.start_button.UseVisualStyleBackColor = true;
-            this.start_button.Click += new System.EventHandler(this.start_button_Click);
+            this.generate_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.generate_button.Location = new System.Drawing.Point(40, 248);
+            this.generate_button.Name = "generate_button";
+            this.generate_button.Size = new System.Drawing.Size(155, 23);
+            this.generate_button.TabIndex = 6;
+            this.generate_button.Text = "Generate";
+            this.generate_button.UseVisualStyleBackColor = true;
+            this.generate_button.Click += new System.EventHandler(this.generate_button_Click);
             // 
             // size_input
             // 
@@ -169,9 +182,10 @@ namespace Killer_Sudoku
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label thread_label;
         private System.Windows.Forms.TextBox size_input;
-        private System.Windows.Forms.Button start_button;
+        private System.Windows.Forms.Button generate_button;
         private System.Windows.Forms.Button save_killer;
         private System.Windows.Forms.Button load_killer;
+        private Button button1;
     }
 }
 
