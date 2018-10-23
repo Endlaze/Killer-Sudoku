@@ -196,7 +196,7 @@ namespace Killer_Sudoku
             int threads = Int32.Parse(thread_input.Text);
 
             this.killerSudokuSolver = new KillerSudokuSolver.KillerSudokuSolver(size, threads, this.killer);
-            this.killerSudokuSolver.start();
+            //this.killerSudokuSolver.start();
             int[,] matrix = this.killerSudokuSolver.GetSudokuBoard();
 
             ArrayExt.Print2DArray(matrix);
