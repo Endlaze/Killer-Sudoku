@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Killer_Sudoku.KillerSudokuBoard
 {
-    class Board
+    public class Board
     {
         private Color lastColor= Color.FromArgb(255,0,0);
         private int size;
@@ -28,11 +28,30 @@ namespace Killer_Sudoku.KillerSudokuBoard
             InitBoard(size);
             KillerSudokuSolver.SudokuSolver sudoku = new SudokuSolver(size, threads);
             this.values = sudoku.GetSudokuBoard();
+            ArrayExt.Print2DArray(values);
             fitTetrisFigures();
-            
+        }
+        public Board() { 
+}
 
+        public Board(List<SerializableFigure> figures,int size)
+        {
+            this.board = new Cell[size, size];
+            this.threads = threads;
+            this.size = 5;
+            foreach (var fig in figures)
+            {
+                lastColor = Utils.Utils.GetNewColor(lastColor);
+                fig.Color = lastColor;
+                this.boardFigures.Add(fig);
+            }
 
+        }
 
+        public int Size
+        {
+            get { return this.size; }
+            set { this.size = value; }
         }
 
         //Function to init the board

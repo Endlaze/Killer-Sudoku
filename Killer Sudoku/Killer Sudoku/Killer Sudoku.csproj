@@ -52,7 +52,9 @@
     <Compile Include="GenericBoard.cs" />
     <Compile Include="KillerSudokuSolver\KillerSudokuSolver.cs" />
     <Compile Include="KillerSudokuSolver\SudokuSolver.cs" />
+    <Compile Include="SerializedBoard.cs" />
     <Compile Include="TetrisFigures\Permutations.cs" />
+    <Compile Include="TetrisFigures\SerializableFigure.cs" />
     <Compile Include="Utils\ArrayUtils.cs" />
     <Compile Include="KillerSudokuBoard\Board.cs" />
     <Compile Include="TetrisFigures\ArrayOperations.cs" />

@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Killer_Sudoku.TetrisFigures.Figures
 {
-    class Skew: TetrisFigure
+    public class Skew: TetrisFigure
     {
+        public Skew()
+        {
+
+        }
         public override void InitFigureCoordinates(int[] pivot)
         {
             MaxRotation = 1;

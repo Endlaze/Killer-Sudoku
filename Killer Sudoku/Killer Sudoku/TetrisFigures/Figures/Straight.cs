@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Killer_Sudoku.TetrisFigures.Figures
 {
-    class Straight: TetrisFigure
+    
+    public class Straight: TetrisFigure
     {
+
+        public Straight()
+        {
+
+        }
         int size;
         public Straight(int size) {
             this.size = size;

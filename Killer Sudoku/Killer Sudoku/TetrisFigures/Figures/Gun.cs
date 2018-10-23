@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Killer_Sudoku.TetrisFigures.Figures
 {
-    class Gun : TetrisFigure
+    
+    public class Gun : TetrisFigure
     {
+        public Gun() { }
         public override void InitFigureCoordinates(int[] pivot)
         {
             MaxRotation = 3;

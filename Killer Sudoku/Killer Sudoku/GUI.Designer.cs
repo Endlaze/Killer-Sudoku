@@ -33,7 +33,7 @@ namespace Killer_Sudoku
         {
             this.killer_sudoku_label = new System.Windows.Forms.Label();
             this.options_panel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.solve = new System.Windows.Forms.Button();
             this.save_killer = new System.Windows.Forms.Button();
             this.load_killer = new System.Windows.Forms.Button();
             this.generate_button = new System.Windows.Forms.Button();
@@ -57,7 +57,7 @@ namespace Killer_Sudoku
             // 
             // options_panel
             // 
-            this.options_panel.Controls.Add(this.button1);
+            this.options_panel.Controls.Add(this.solve);
             this.options_panel.Controls.Add(this.save_killer);
             this.options_panel.Controls.Add(this.load_killer);
             this.options_panel.Controls.Add(this.generate_button);
@@ -70,16 +70,16 @@ namespace Killer_Sudoku
             this.options_panel.Size = new System.Drawing.Size(235, 383);
             this.options_panel.TabIndex = 1;
             // 
-            // button1
+            // solve
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(40, 292);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Solve";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.solve.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.solve.Location = new System.Drawing.Point(40, 292);
+            this.solve.Name = "solve";
+            this.solve.Size = new System.Drawing.Size(155, 23);
+            this.solve.TabIndex = 9;
+            this.solve.Text = "Solve";
+            this.solve.UseVisualStyleBackColor = true;
+            this.solve.Click += new System.EventHandler(this.button1_Click);
             // 
             // save_killer
             // 
@@ -185,7 +185,7 @@ namespace Killer_Sudoku
         private System.Windows.Forms.Button generate_button;
         private System.Windows.Forms.Button save_killer;
         private System.Windows.Forms.Button load_killer;
-        private Button button1;
+        private Button solve;
     }
 }
 

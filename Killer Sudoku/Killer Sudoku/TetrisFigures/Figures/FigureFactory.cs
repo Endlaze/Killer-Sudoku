@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Killer_Sudoku.TetrisFigures.Figures
 {
-    class FigureFactory
+    public class FigureFactory
     {
         
         public static TetrisFigure GetNewFigure(string figure, int size=0)

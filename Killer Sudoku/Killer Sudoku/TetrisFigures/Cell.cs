@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Killer_Sudoku.TetrisFigures
 {
-    class Cell
+    public class Cell
     {
        public Cell() { }
        private  int[] position;

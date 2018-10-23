@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Killer_Sudoku
 {
-    abstract class TetrisFigure
+    public abstract class TetrisFigure
     {
         private Cell[] cells;
         private Color color;
@@ -19,6 +19,7 @@ namespace Killer_Sudoku
         private string type;
         List<List<int>> figurePermutations;
         List<int> usedPermutations;
+
 
         //UsedPermutations setter & getter
         public List<int> UsedPermutations
