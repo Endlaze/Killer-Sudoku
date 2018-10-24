@@ -27,6 +27,10 @@ namespace Killer_Sudoku.KillerSudokuBoard
             this.board= new Cell[size, size];
             InitBoard(size);
             KillerSudokuSolver.SudokuSolver sudoku = new SudokuSolver(size, threads);
+            while(sudoku.GetSudokuBoard() == null)
+            {
+
+            }
             this.values = sudoku.GetSudokuBoard();
             ArrayExt.Print2DArray(values);
             fitTetrisFigures();
@@ -89,7 +93,7 @@ namespace Killer_Sudoku.KillerSudokuBoard
 
         public TetrisFigure figureThatFits(int [] pivot)
         {
-            string[] operations = { "sum", "mult" };
+            string[] operations = {  "sum","mult" };
             string[] figures = { "block", "gun", "skew", "straight", "straight", "straight" };
             int[] figuresSizes = { 0, 0, 0, 3, 2, 1 };
             int cont = 1;
@@ -115,7 +119,15 @@ namespace Killer_Sudoku.KillerSudokuBoard
                     rotated = 0;
                 }
             }
-            figure.Operation = operations[new Random().Next(0,operations.Length)];
+            if(figure.Type == "block" || figure.Type == "skew")
+            {
+                figure.Operation = "mult";
+            }
+            else
+            {
+                figure.Operation = operations[new Random().Next(0, operations.Length)];
+            }
+            
 
 
             return figure;

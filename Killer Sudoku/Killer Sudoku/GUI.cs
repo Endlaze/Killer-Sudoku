@@ -234,7 +234,7 @@ namespace Killer_Sudoku
             this.killerSudokuSolver.start();
             int[,] matrix = this.killerSudokuSolver.GetSudokuBoard();
             drawNumbersOnBoard(matrix);
-            // board1 = CreateBoard(10, 70, size, 33);
+
         }
 
         //Drawing utils
@@ -278,7 +278,9 @@ namespace Killer_Sudoku
 
         private void cleanBoard()
         {
+
             foreach (var item in board1)
+
             {
                 this.Controls.Remove(item);
             }
