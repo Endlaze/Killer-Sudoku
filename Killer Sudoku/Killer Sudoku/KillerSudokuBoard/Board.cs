@@ -27,10 +27,6 @@ namespace Killer_Sudoku.KillerSudokuBoard
             this.board= new Cell[size, size];
             InitBoard(size);
             KillerSudokuSolver.SudokuSolver sudoku = new SudokuSolver(size, threads);
-            while(sudoku.GetSudokuBoard() == null)
-            {
-
-            }
             this.values = sudoku.GetSudokuBoard();
             ArrayExt.Print2DArray(values);
             fitTetrisFigures();
