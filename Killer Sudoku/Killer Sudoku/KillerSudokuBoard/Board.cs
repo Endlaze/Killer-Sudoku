@@ -42,7 +42,7 @@ namespace Killer_Sudoku.KillerSudokuBoard
         {
             this.board = new Cell[size, size];
             this.threads = threads;
-            this.size = 5;
+            this.size = size;
             foreach (var fig in figures)
             {
                 lastColor = Utils.Utils.GetNewColor(lastColor);

@@ -120,8 +120,9 @@ namespace Killer_Sudoku
                 
                 Board boarda = new Board(serializedB.listOfFigures, serializedB.size);
                 this.killer = boarda;
-                
+                cleanBoard();
                 board1 = CreateBoard(10, 70, serializedB.size, 33);
+                
                 drawColorsOnBoard(boarda.boardFigures);
                 drawOperationsOnBoard(boarda.boardFigures);
 
@@ -212,12 +213,21 @@ namespace Killer_Sudoku
 
         private void generate_button_Click(object sender, EventArgs e)
         {
-            
+            if (this.board1!=null)
+            {
+                cleanBoard();
+                this.board1 = null;
+                this.killer = null;
+            }
             int size = Int32.Parse(size_input.Text);
             int threads = Int32.Parse(thread_input.Text);
-            
+
+
+
+            Board boarda = new Board(size, size);
+
             board1 = new PictureBox[size, size];
-            this.killer = new Board(size, threads);
+            this.killer = boarda;
             
             List<TetrisFigure> boardFigures = this.killer.boardFigures;
             board1 = CreateBoard(10, 70, size, 33);
